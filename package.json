@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "playwright": "^1.51.1"
+  },
+  "name": "jules_ai_automation",
+  "version": "1.0.0",
+  "description": "Jules AI - Automation Suite Created with Javascript and Playwright",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.51.1",
+    "@types/node": "^22.13.17"
+  }
+}
