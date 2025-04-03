@@ -1,17 +1,17 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../Pages/LoginPage';
-import { HomePage } from '../Pages/HomePage';
+import { StaticNavPage } from '../Pages/StaticNavPage';
 import fs from 'fs';
 import csv from 'csv-parser';
 
-let loginPage, homePage;
+let loginPage, staticNavPage;
 let email = "qa@julesai.com", password = "QaJULES2023!";
 
 test.beforeEach(async ({page}) => {
 
     loginPage = new LoginPage(page);
-    homePage = new HomePage(page);
+    staticNavPage = new StaticNavPage(page);
 
     await page.evaluate(() => {
       window.resizeTo(window.screen.width, window.screen.height);
@@ -27,7 +27,7 @@ test("TC_01 - Validate Successful Login Process", async ({page}) => {
 
   await expect(page).toHaveURL("https://demo.haroldwaste.com/purchases");
 
-  await homePage.logout();
+  await staticNavPage.logout();
 
   await expect(page).toHaveURL("https://demo.haroldwaste.com/authentication");
 
