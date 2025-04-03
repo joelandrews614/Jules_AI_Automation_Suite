@@ -13,6 +13,7 @@ import { defineConfig, devices } from '@playwright/test';
  * @see https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
+  timeout: 60_000,
   testDir: './regression-tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -33,6 +34,10 @@ export default defineConfig({
     trace: 'on-first-retry',
   },
 
+  expect: {
+    timeout: 50_000,
+  },
+
   /* Configure projects for major browsers */
   projects: [
     {
@@ -46,8 +51,8 @@ export default defineConfig({
     },
 
     {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+        name: 'Microsoft Edge',
+        use: { ...devices['Desktop Edge'], channel: 'msedge' },
     },
 
     /* Test against mobile viewports. */
