@@ -1,0 +1,387 @@
+{
+	"info": {
+		"_postman_id": "20b44394-cceb-4346-9f0b-1f6931d0c77c",
+		"name": "Jules API Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16473072",
+		"_collection_link": "https://www.postman.com/navigation-geoscientist-28440661/workspace/myworkspace/collection/16473072-20b44394-cceb-4346-9f0b-1f6931d0c77c?action=share&source=collection_link&creator=16473072"
+	},
+	"item": [
+		{
+			"name": "Login Scenarios",
+			"item": [
+				{
+					"name": "Successful Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status and Response Validation for Successful Login\", () => {\r",
+									"\t\r",
+									"    var response = pm.response.json();\r",
+									"\r",
+									"\tpm.response.to.have.status(200);\r",
+									"\r",
+									"\tpm.expect(response.data.login.token).to.exist;\r",
+									"\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"operationName\": \"login\",\r\n    \"variables\": {\r\n        \"email\": \"qa@julesai.com\",\r\n        \"password\": \"QaJULES2023!\"\r\n    },\r\n    \"extensions\": {\r\n        \"persistedQuery\": {\r\n            \"version\": 1,\r\n            \"sha256Hash\": \"ab50d832c7fe27534f4a42b330d919766ad8406649899c4ee8a50a19ae103470\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://demo.api.haroldwaste.com/graphql",
+							"protocol": "https",
+							"host": [
+								"demo",
+								"api",
+								"haroldwaste",
+								"com"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Empty Username and Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status and Response Validation for Empty Username and Password\", () => {\r",
+									"\t\r",
+									"\tpm.response.to.have.status(200);\r",
+									"\t\r",
+									"\tvar response = pm.response.json();\r",
+									"\tpm.expect(response.errors[0].message).to.eq(\"data and hash arguments required\");\r",
+									"\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"operationName\": \"login\",\r\n    \"variables\": {\r\n        \"email\": \"\",\r\n        \"password\": \"\"\r\n    },\r\n    \"extensions\": {\r\n        \"persistedQuery\": {\r\n            \"version\": 1,\r\n            \"sha256Hash\": \"ab50d832c7fe27534f4a42b330d919766ad8406649899c4ee8a50a19ae103470\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://demo.api.haroldwaste.com/graphql",
+							"protocol": "https",
+							"host": [
+								"demo",
+								"api",
+								"haroldwaste",
+								"com"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid Username but with Valid Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status and Response Validation for Invalid Username but with Valid Password\", () => {\r",
+									"\t\r",
+									"\tpm.response.to.have.status(200);\r",
+									"\t\r",
+									"\tvar response = pm.response.json();\r",
+									"\tpm.expect(response.errors[0].message).to.eq(\"WRONG_CREDENTIALS\");\r",
+									"\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"operationName\": \"login\",\r\n    \"variables\": {\r\n        \"email\": \"joel123@gmail.com\",\r\n        \"password\": \"QaJULES2023!\"\r\n    },\r\n    \"extensions\": {\r\n        \"persistedQuery\": {\r\n            \"version\": 1,\r\n            \"sha256Hash\": \"ab50d832c7fe27534f4a42b330d919766ad8406649899c4ee8a50a19ae103470\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://demo.api.haroldwaste.com/graphql",
+							"protocol": "https",
+							"host": [
+								"demo",
+								"api",
+								"haroldwaste",
+								"com"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Valid Username but with Invalid Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status and Response Validation for Valid Username but with Invalid Password\", () => {\r",
+									"\t\r",
+									"\tpm.response.to.have.status(200);\r",
+									"\t\r",
+									"\tvar response = pm.response.json();\r",
+									"\tpm.expect(response.errors[0].message).to.eq(\"WRONG_CREDENTIALS\");\r",
+									"\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"operationName\": \"login\",\r\n    \"variables\": {\r\n        \"email\": \"qa@julesai.com\",\r\n        \"password\": \"JOELANDREWS2023!\"\r\n    },\r\n    \"extensions\": {\r\n        \"persistedQuery\": {\r\n            \"version\": 1,\r\n            \"sha256Hash\": \"ab50d832c7fe27534f4a42b330d919766ad8406649899c4ee8a50a19ae103470\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://demo.api.haroldwaste.com/graphql",
+							"protocol": "https",
+							"host": [
+								"demo",
+								"api",
+								"haroldwaste",
+								"com"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Negative Scenarios",
+			"item": [
+				{
+					"name": "Invalid Endpoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validate Invalid Endpoint\", () => {\r",
+									"\t\r",
+									"\tpm.response.to.have.status(404);\r",
+									"\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"operationName\": \"login\",\r\n    \"variables\": {\r\n        \"email\": \"qa@julesai.com\",\r\n        \"password\": \"QaJULES2023!\"\r\n    },\r\n    \"extensions\": {\r\n        \"persistedQuery\": {\r\n            \"version\": 1,\r\n            \"sha256Hash\": \"ab50d832c7fe27534f4a42b330d919766ad8406649899c4ee8a50a19ae103470\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://demo.api.haroldwaste.com/graphqlTEST",
+							"protocol": "https",
+							"host": [
+								"demo",
+								"api",
+								"haroldwaste",
+								"com"
+							],
+							"path": [
+								"graphqlTEST"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid API Method",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validate Invalid API Method\", () => {\r",
+									"\t\r",
+									"\tpm.response.to.have.status(400);\r",
+									"\t\r",
+									"\tvar response = pm.response.json();\r",
+									"\tpm.expect(response.errors[0].extensions.code).to.eq(\"BAD_REQUEST\");\r",
+									"\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"operationName\": \"login\",\r\n    \"variables\": {\r\n        \"email\": \"qa@julesai.com\",\r\n        \"password\": \"QaJULES2023!\"\r\n    },\r\n    \"extensions\": {\r\n        \"persistedQuery\": {\r\n            \"version\": 1,\r\n            \"sha256Hash\": \"ab50d832c7fe27534f4a42b330d919766ad8406649899c4ee8a50a19ae103470\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://demo.api.haroldwaste.com/graphql",
+							"protocol": "https",
+							"host": [
+								"demo",
+								"api",
+								"haroldwaste",
+								"com"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid Request Body",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validate Invalid Request Body\", () => {\r",
+									"\t\r",
+									"    var response = pm.response.json();\r",
+									"\r",
+									"\tpm.response.to.have.status(200);\r",
+									"\r",
+									"\tpm.expect(response.errors[0].message).to.eq(\"Variable \\\"$password\\\" of required type \\\"String!\\\" was not provided.\");\r",
+									"\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"operationName\": \"login\",\r\n    \"variables\": {\r\n        \"email\": \"qa@julesai.com\"\r\n    },\r\n    \"extensions\": {\r\n        \"persistedQuery\": {\r\n            \"version\": 1,\r\n            \"sha256Hash\": \"ab50d832c7fe27534f4a42b330d919766ad8406649899c4ee8a50a19ae103470\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://demo.api.haroldwaste.com/graphql",
+							"protocol": "https",
+							"host": [
+								"demo",
+								"api",
+								"haroldwaste",
+								"com"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
